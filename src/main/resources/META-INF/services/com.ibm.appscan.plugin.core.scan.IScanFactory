@@ -1,0 +1,2 @@
+com.ibm.appscan.plugin.core.scanners.sast.SASTScanFactory
+com.ibm.appscan.plugin.core.scanners.mobile.MAScanFactory
