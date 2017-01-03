@@ -7,10 +7,8 @@ package com.ibm.appscan.plugin.core.scanners.mobile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.ibm.appscan.plugin.core.CoreConstants;
 import com.ibm.appscan.plugin.core.error.InvalidTargetException;
 import com.ibm.appscan.plugin.core.error.ScannerException;
 import com.ibm.appscan.plugin.core.logging.DefaultProgress;
@@ -44,10 +42,8 @@ public class MAScan extends ASoCScan implements MAConstants {
 			if(fileId == null)
 				throw new ScannerException(Messages.getMessage(ERROR_FILE_UPLOAD, targetFile.getName()));
 
-			Map<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = getProperties();
 			params.put(APPLICATION_FILE_ID, fileId);
-			params.put(CoreConstants.APP_ID, getAppId());
-			params.put(CoreConstants.SCAN_NAME, getName());
 			
 			setScanId(getServiceProvider().createAndExecuteScan(MOBILE_ANALYZER, params));
 			if(getScanId() == null)

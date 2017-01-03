@@ -8,10 +8,8 @@ package com.ibm.appscan.plugin.core.scanners.sast;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.ibm.appscan.plugin.core.CoreConstants;
 import com.ibm.appscan.plugin.core.error.InvalidTargetException;
 import com.ibm.appscan.plugin.core.error.ScannerException;
 import com.ibm.appscan.plugin.core.logging.DefaultProgress;
@@ -85,10 +83,8 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		if(fileId == null)
 			throw new ScannerException(Messages.getMessage(ERROR_FILE_UPLOAD, m_irx.getName()));		
 				
-		Map<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = getProperties();
 		params.put(ARSA_FILE_ID, fileId);
-		params.put(CoreConstants.APP_ID, getAppId());
-		params.put(CoreConstants.SCAN_NAME, getName());
 		
 		setScanId(getServiceProvider().createAndExecuteScan(STATIC_ANALYZER, params));
 		if(getScanId() == null)
