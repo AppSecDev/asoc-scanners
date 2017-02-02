@@ -12,26 +12,25 @@ import com.ibm.appscan.plugin.core.logging.DefaultProgress;
 import com.ibm.appscan.plugin.core.logging.IProgress;
 import com.ibm.appscan.plugin.core.results.CloudResultsProvider;
 import com.ibm.appscan.plugin.core.results.IResultsProvider;
-import com.ibm.appscan.plugin.core.scan.IScanServiceProvider;
 import com.ibm.appscan.plugin.core.scan.IScan;
+import com.ibm.appscan.plugin.core.scan.IScanServiceProvider;
+import com.ibm.appscan.plugin.core.utils.SystemUtil;
 
 public abstract class ASoCScan implements IScan, ScanConstants{
 	
 	private String m_target;
-	private String m_appId;
-	private String m_name;
 	private String m_scanId;
 	private IProgress m_progress;
 	private IScanServiceProvider m_serviceProvider;
+	private Map<String, String> m_properties;
 	
 	public ASoCScan(Map<String, String> properties, IScanServiceProvider provider) {
 		this(properties, new DefaultProgress(), provider);
 	}
 	
 	public ASoCScan(Map<String, String> properties, IProgress progress, IScanServiceProvider provider) {
-		m_target = properties.get(CoreConstants.TARGET);
-		m_appId = properties.get(CoreConstants.ID) == null ? DEFAULT_APP_ID : properties.get(CoreConstants.ID);
-		m_name = properties.get(CoreConstants.NAME) == null ? getType() : properties.get(CoreConstants.NAME);
+		m_target = properties.remove(CoreConstants.TARGET);
+		m_properties = properties;
 		m_progress = progress;
 		m_serviceProvider = provider;
 	}
@@ -43,7 +42,7 @@ public abstract class ASoCScan implements IScan, ScanConstants{
 
 	@Override
 	public String getName() {
-		return m_name;
+		return m_properties.get(CoreConstants.SCAN_NAME);
 	}
 	
 	@Override
@@ -58,7 +57,7 @@ public abstract class ASoCScan implements IScan, ScanConstants{
 	}
 	
 	protected String getAppId() {
-		return m_appId;
+		return m_properties.get(CoreConstants.APP_ID);
 	}
 	
 	protected String getTarget() {
@@ -73,5 +72,14 @@ public abstract class ASoCScan implements IScan, ScanConstants{
 		return m_serviceProvider;
 	}
 	
+	protected Map<String, String> getProperties() {
+		if(!m_properties.containsKey(CoreConstants.LOCALE))
+			m_properties.put(CoreConstants.LOCALE, SystemUtil.getLocale());
+		if(!m_properties.containsKey(CoreConstants.EMAIL_NOTIFICATION))
+			m_properties.put(CoreConstants.EMAIL_NOTIFICATION, Boolean.toString(false));
+		return m_properties;
+	}
+	
 	protected abstract String getReportFormat();
 }
+
