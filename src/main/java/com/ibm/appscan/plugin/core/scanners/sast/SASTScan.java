@@ -61,8 +61,15 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 	}
 	
 	private void generateIR() throws IOException, ScannerException {
-		//Get the target directory
 		File targetFile = new File(getTarget());
+
+		//If we were given an irx file, don't generate a new one
+		if(targetFile.getName().endsWith(IRX_EXTENSION) && targetFile.isFile()) {
+			m_irx = targetFile;
+			return;
+		}
+
+		//Get the target directory
 		String targetDir = targetFile.isDirectory() ? targetFile.getAbsolutePath() : targetFile.getParent();
 
 		//Set the args
