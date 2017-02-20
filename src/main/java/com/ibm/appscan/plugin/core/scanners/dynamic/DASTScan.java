@@ -38,7 +38,7 @@ public class DASTScan extends ASoCScan implements DASTConstants {
 		String scanFile = params.remove(SCAN_FILE);
 		if(scanFile != null && new File(scanFile).isFile()) {
 			type = DYNAMIC_ANALYZER_WITH_FILE;
-			File file = new File(params.remove(SCAN_FILE));
+			File file = new File(scanFile);
 			
 			try {
 				String fileId = getServiceProvider().submitFile(file);
