@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 
 import com.ibm.appscan.plugin.core.error.InvalidTargetException;
 import com.ibm.appscan.plugin.core.error.ScannerException;
@@ -17,6 +18,8 @@ import com.ibm.appscan.plugin.core.logging.IProgress;
 import com.ibm.appscan.plugin.core.scan.IScanServiceProvider;
 import com.ibm.appscan.plugin.core.scanners.ASoCScan;
 import com.ibm.appscan.plugin.core.scanners.Messages;
+import com.ibm.appscan.plugin.core.CoreConstants;
+
 
 public class SASTScan extends ASoCScan implements SASTConstants {
 
@@ -41,12 +44,15 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 
 		try {
 			generateIR();
-			analyzeIR();
+            if(isRunAnalysis())
+            {
+                analyzeIR();
+            }
 		} catch(IOException e) {
 			throw new ScannerException(Messages.getMessage(SCAN_FAILED, e.getLocalizedMessage()));
 		}
 		
-		if(getScanId() == null)
+		if(isRunAnalysis() && getScanId() == null)
 			throw new ScannerException(Messages.getMessage(ERROR_RUNNING_SCAN));
 	}
 
@@ -60,6 +66,12 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		return REPORT_FORMAT;
 	}
 	
+    private boolean isRunAnalysis() {
+        if(getRunAnalysis()!= null && getRunAnalysis().equalsIgnoreCase("FALSE"))
+            return false;
+        return true;
+    }
+    
 	private void generateIR() throws IOException, ScannerException {
 		File targetFile = new File(getTarget());
 
