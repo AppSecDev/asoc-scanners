@@ -44,15 +44,13 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 
 		try {
 			generateIR();
-            if(isRunAnalysis())
-            {
-                analyzeIR();
-            }
+            		if(runAnalysis())
+                		analyzeIR();
 		} catch(IOException e) {
 			throw new ScannerException(Messages.getMessage(SCAN_FAILED, e.getLocalizedMessage()));
 		}
 		
-		if(isRunAnalysis() && getScanId() == null)
+		if(runAnalysis() && getScanId() == null)
 			throw new ScannerException(Messages.getMessage(ERROR_RUNNING_SCAN));
 	}
 
@@ -66,7 +64,7 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		return REPORT_FORMAT;
 	}
 	
-	private boolean isRunAnalysis() {
+	private boolean runAnalysis() {
 		return !getProperties().containsKey(PREPARE_ONLY);
 	}	
     
