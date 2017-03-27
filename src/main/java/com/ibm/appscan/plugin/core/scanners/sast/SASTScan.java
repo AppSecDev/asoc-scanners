@@ -66,11 +66,9 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		return REPORT_FORMAT;
 	}
 	
-    private boolean isRunAnalysis() {
-        if(getRunAnalysis()!= null && getRunAnalysis().equalsIgnoreCase("FALSE"))
-            return false;
-        return true;
-    }
+	private boolean isRunAnalysis() {
+		return !getProperties().containsKey(PREPARE_ONLY);
+	}	
     
 	private void generateIR() throws IOException, ScannerException {
 		File targetFile = new File(getTarget());
