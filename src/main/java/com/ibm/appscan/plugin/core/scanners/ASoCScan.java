@@ -33,6 +33,7 @@ public abstract class ASoCScan implements IScan, ScanConstants{
 		m_properties = properties;
 		m_progress = progress;
 		m_serviceProvider = provider;
+        m_runAnalysis = properties.get(CoreConstants.RUN_ANALYSIS);
 	}
 
 	@Override
@@ -79,6 +80,11 @@ public abstract class ASoCScan implements IScan, ScanConstants{
 			m_properties.put(CoreConstants.EMAIL_NOTIFICATION, Boolean.toString(false));
 		return m_properties;
 	}
+    
+    protected String getRunAnalysis() {
+        return m_runAnalysis;
+    }
+    
 	
 	protected abstract String getReportFormat();
 }

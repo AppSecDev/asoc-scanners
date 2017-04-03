@@ -19,6 +19,7 @@ public interface SASTConstants {
 	
 	String PREPARE						= "prepare";						//$NON-NLS-1$
 	String OPT_NAME						= "-n";								//$NON-NLS-1$
+	String PREPARE_ONLY					= "prepareOnly";					//$NON-NLS-1$
 	
 	//Messages
 	String DONE							= "message.done";					//$NON-NLS-1$
