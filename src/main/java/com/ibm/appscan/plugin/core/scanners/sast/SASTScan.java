@@ -45,9 +45,6 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		} catch(IOException e) {
 			throw new ScannerException(Messages.getMessage(SCAN_FAILED, e.getLocalizedMessage()));
 		}
-		
-		if(getScanId() == null)
-			throw new ScannerException(Messages.getMessage(ERROR_RUNNING_SCAN));
 	}
 
 	@Override
@@ -58,6 +55,10 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 	@Override
 	protected String getReportFormat() {
 		return REPORT_FORMAT;
+	}
+
+	public File getIrx() {
+		return m_irx;
 	}
 	
 	private void generateIR() throws IOException, ScannerException {
@@ -86,6 +87,9 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 	}
 	
 	private void analyzeIR() throws IOException, ScannerException {
+		if(getProperties().containsKey(PREPARE_ONLY))
+			return;
+
 		String fileId = getServiceProvider().submitFile(m_irx);
 		if(fileId == null)
 			throw new ScannerException(Messages.getMessage(ERROR_FILE_UPLOAD, m_irx.getName()));		
