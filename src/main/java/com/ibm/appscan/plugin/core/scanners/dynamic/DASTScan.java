@@ -14,6 +14,7 @@ import com.ibm.appscan.plugin.core.scanners.Messages;
 
 public class DASTScan extends ASoCScan implements DASTConstants {
 
+	private static final long serialVersionUID = 1L;
 	private static final String REPORT_FORMAT = "pdf"; //$NON-NLS-1$
 	
 	public DASTScan(Map<String, String> properties, IScanServiceProvider provider) {

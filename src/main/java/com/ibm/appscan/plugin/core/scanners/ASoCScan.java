@@ -5,6 +5,7 @@
 
 package com.ibm.appscan.plugin.core.scanners;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import com.ibm.appscan.plugin.core.CoreConstants;
@@ -16,7 +17,9 @@ import com.ibm.appscan.plugin.core.scan.IScan;
 import com.ibm.appscan.plugin.core.scan.IScanServiceProvider;
 import com.ibm.appscan.plugin.core.utils.SystemUtil;
 
-public abstract class ASoCScan implements IScan, ScanConstants{
+public abstract class ASoCScan implements IScan, ScanConstants, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String m_target;
 	private String m_scanId;

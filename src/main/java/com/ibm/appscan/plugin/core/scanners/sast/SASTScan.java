@@ -20,6 +20,7 @@ import com.ibm.appscan.plugin.core.scanners.Messages;
 
 public class SASTScan extends ASoCScan implements SASTConstants {
 
+	private static final long serialVersionUID = 1L;
 	private static final String REPORT_FORMAT = "html"; //$NON-NLS-1$
 	
 	private File m_irx;

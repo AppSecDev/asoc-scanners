@@ -19,6 +19,7 @@ import com.ibm.appscan.plugin.core.scanners.Messages;
 
 public class MAScan extends ASoCScan implements MAConstants {
 	
+	private static final long serialVersionUID = 1L;
 	private static final String REPORT_FORMAT = "pdf"; //$NON-NLS-1$
 	
 	public MAScan(Map<String, String> properties, IScanServiceProvider provider) {
