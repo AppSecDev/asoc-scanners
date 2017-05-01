@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ibm.appscan</groupId>
   <artifactId>com.ibm.appscan.plugin.core.scanners</artifactId>
-  <version>1.1.2</version>
+  <version>1.1.3</version>
   <packaging>jar</packaging>
   
   <licenses>
@@ -51,7 +51,7 @@
 	<dependency>
 		<groupId>com.github.AppSecDev</groupId>
 		<artifactId>asoc-core</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 	</dependency>
   </dependencies>
   
