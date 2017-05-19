@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ibm.appscan.plugin.core.CoreConstants;
 import com.ibm.appscan.plugin.core.error.ScannerException;
@@ -44,7 +45,19 @@ public class SAClient implements SASTConstants {
 		m_installDir = install == null ? DEFAULT_INSTALL_DIR : new File(install);
 	}
 	
-	public int run(String workingDir, List<String> args) throws IOException, ScannerException {	
+	public int run(String workingDir, Map<String, String> properties) throws IOException, ScannerException {
+		return runClient(workingDir, getClientArgs(properties));
+	}
+	
+	/**
+	 * @deprecated Use {@link #run(String, Map)} instead.
+	 */
+	@Deprecated
+	public int run(String workingDir, List<String> args) throws IOException, ScannerException {
+		return runClient(workingDir, args);
+	}
+		
+	private int runClient(String workingDir, List<String> args) throws IOException, ScannerException {
 		ArrayList<String> arguments = new ArrayList<String>();
 		arguments.add(getClientScript());
 		arguments.addAll(args);
@@ -187,5 +200,40 @@ public class SAClient implements SASTConstants {
 				file.delete();
 		}
 		directory.delete();
+	}
+	
+	/**
+	 * Given a Map of properties, returns a List of arguments.
+	 * @param properties The Map of properties.
+	 * @return A list of command line arguments for the SAClient to use
+	 */
+	private List<String> getClientArgs(Map<String, String> properties) {
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(PREPARE);
+		
+		if(properties.containsKey(CoreConstants.SCAN_NAME)) {
+			args.add(OPT_NAME);
+			args.add(properties.get(CoreConstants.SCAN_NAME));
+		}
+		if(properties.containsKey(LOG_LOCATION)) {
+			args.add(OPT_LOG_LOCATION);
+			args.add(properties.get(LOG_LOCATION));
+		}
+		if(properties.containsKey(SAVE_LOCATION)) {
+			args.add(OPT_SAVE_LOCATION);
+			args.add(properties.get(SAVE_LOCATION));
+		}
+		if(properties.containsKey(CONFIG_FILE)) {
+			args.add(OPT_CONFIG);
+			args.add(properties.get(CONFIG_FILE));
+		}
+		if(properties.containsKey(DEBUG))
+			args.add(OPT_DEBUG);
+		if(properties.containsKey(VERBOSE))
+			args.add(OPT_VERBOSE);
+		if(properties.containsKey(THIRD_PARTY))
+			args.add(OPT_THIRD_PARTY);
+		
+		return args;
 	}
 }
