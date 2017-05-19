@@ -45,6 +45,14 @@ public class SAClient implements SASTConstants {
 		m_installDir = install == null ? DEFAULT_INSTALL_DIR : new File(install);
 	}
 	
+	/**
+	 * Run the SAClient
+	 * @param workingDir The directory where the SAClient will run.
+	 * @param properties A Map of properties that will be converted to program arguments.
+	 * @return The process exit code, 0 for success.
+	 * @throws IOException
+	 * @throws ScannerException
+	 */
 	public int run(String workingDir, Map<String, String> properties) throws IOException, ScannerException {
 		return runClient(workingDir, getClientArgs(properties));
 	}
