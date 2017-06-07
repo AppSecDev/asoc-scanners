@@ -51,7 +51,7 @@
 	<dependency>
 		<groupId>com.github.AppSecDev</groupId>
 		<artifactId>asoc-core</artifactId>
-		<version>1.0.2</version>
+		<version>scan_manager-SNAPSHOT</version>
 	</dependency>
   </dependencies>
   
