@@ -7,7 +7,6 @@ package com.ibm.appscan.plugin.core.scanners.sast;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.ibm.appscan.plugin.core.error.InvalidTargetException;
@@ -74,15 +73,10 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		//Get the target directory
 		String targetDir = targetFile.isDirectory() ? targetFile.getAbsolutePath() : targetFile.getParent();
 
-		//Set the args
-		ArrayList<String> args = new ArrayList<String>();
-		args.add(PREPARE);
-		args.add(OPT_NAME);
-		args.add(getName());
-		
 		//Create and run the process
-		new SAClient(getProgress()).run(targetDir, args);
-		m_irx = new File(targetDir, getName() + IRX_EXTENSION);
+		new SAClient(getProgress()).run(targetDir, getProperties());
+		String irxDir = getProperties().containsKey(SAVE_LOCATION) ? getProperties().get(SAVE_LOCATION) : targetDir;
+		m_irx = new File(irxDir, getName() + IRX_EXTENSION);
 		if(!m_irx.isFile())
 			throw new ScannerException(Messages.getMessage(ERROR_GENERATING_IRX, getScanLogs().getAbsolutePath()));
 	}
