@@ -81,7 +81,7 @@ public class SASTScanManager implements IScanManager{
 			writer.write();
 			return writer.getOutputLocation();
 		} catch (IOException | TransformerException  e) {
-			throw new AppScanException(e.getLocalizedMessage());
+			throw new AppScanException(e.getLocalizedMessage(), e);
 		}
 	}
 }

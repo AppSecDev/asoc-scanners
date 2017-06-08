@@ -17,6 +17,9 @@ import com.ibm.appscan.plugin.core.scan.IScanServiceProvider;
 import com.ibm.appscan.plugin.core.scanners.ASoCScan;
 import com.ibm.appscan.plugin.core.scanners.Messages;
 
+/**
+ * A class for running static scans. For greater control over what gets scanned a {@link SASTScanManager} should be used.
+ */
 public class SASTScan extends ASoCScan implements SASTConstants {
 
 	private static final long serialVersionUID = 1L;

@@ -7,6 +7,9 @@ package com.ibm.appscan.plugin.core.scanners.sast.xml;
 
 public interface IModelXMLConstants {
 
+	String APPSCAN_CONFIG			= "appscan-config";			//$NON-NLS-1$
+	String DOT_XML					= ".xml";					//$NON-NLS-1$
+	
 	String E_CONFIGURATION			= "Configuration";			//$NON-NLS-1$
 	String E_TARGETS				= "Targets";				//$NON-NLS-1$
 	String E_TARGET					= "Target";					//$NON-NLS-1$
@@ -25,13 +28,10 @@ public interface IModelXMLConstants {
 	String A_OUTPUTS_ONLY			= "outputs-only";			//$NON-NLS-1$
 	
 	//C++
-	String A_COMPILER_OPTS			= "compiler_opts";
-	String A_MACROS					= "macros";
-	String A_INCLUDE_PATHS			= "include_paths";
-	String A_BUILD_CONFIG			= "build_configuration";
-	
-	String APPSCAN_CONFIG			= "appscan-config";			//$NON-NLS-1$
-	String DOT_XML					= ".xml";					//$NON-NLS-1$
+	String A_COMPILER_OPTS			= "compiler_opts";			//$NON-NLS-1$
+	String A_MACROS					= "macros";					//$NON-NLS-1$
+	String A_INCLUDE_PATHS			= "include_paths";			//$NON-NLS-1$
+	String A_BUILD_CONFIG			= "build_configuration";	//$NON-NLS-1$
 	
 	//.NET
 	String A_REFERENCES 			= "references";				//$NON-NLS-1$
